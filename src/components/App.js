@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, TextInput } from './styles';
+import { ImageCell, Image } from './ImageCell';
 
 class App extends Component {
   state = {
     rows: [
-      { id: 'ybvtb', text: '' },
-      { id: 'm23n4', text: '' },
+      { id: 'ybvtb', text: '', img: [] },
+      { id: 'm23n4', text: '', img: [] },
     ],
     cols: [
-      { id: '12345', text: '' },
-      { id: 'awdwa', text: '' },
+      { id: '12345', text: '', img: [] },
+      { id: 'awdwa', text: '', img: [] },
     ],
   };
 
   handleAdd = axis => () => {
     const id = Math.random().toString(36).slice(-5);
     this.setState({
-      [axis]: [...this.state[axis], { id, text: '' }],
+      [axis]: [...this.state[axis], { id, text: '', img: [] }],
     });
   }
 
@@ -36,7 +37,20 @@ class App extends Component {
       ...cells.slice(cellIndex + 1),
     ];
     this.setState({ [axis]: newCellState });
-  }
+  };
+
+  handleFileChange = axis => (e) => {
+    const cells = this.state[axis];
+    const cellIndex = cells.findIndex(cell => cell.id === e.target.dataset.img);
+    const newState = this.state[axis];
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      newState[cellIndex].img = reader.result;
+      this.setState({ [axis]: newState });
+    };
+    reader.readAsDataURL(file);
+  };
 
   renderDelete = rows => rows.map(({ id }) => (
     <Col
@@ -62,8 +76,12 @@ class App extends Component {
     </Col>
   ));
 
-  renderCols = cols => cols.map(({ id, text }, index) => (
+  renderCols = cols => cols.map(({ id, text, img }, index) => (
     <Row key={id}>
+      {img.length
+        ? <Image src={img} />
+        : <ImageCell change={this.handleFileChange('cols')} id={id} />
+      }
       <Col
         remove
         data-cols={id}
@@ -83,7 +101,7 @@ class App extends Component {
       </Col>
       {this.state.rows.map(col => <Col key={col.id}><input type="radio" /></Col>)}
     </Row>
-  ))
+  ));
 
   render() {
     return (
@@ -91,14 +109,26 @@ class App extends Component {
         <Row>
           <Col space />
           <Col space />
-          {this.renderDelete(this.state.rows)}
+          <Col space />
+          {this.state.rows.map(({ id, img }) => (img.length
+            ? <Image key={id} src={img} />
+            : <ImageCell key={id} change={this.handleFileChange('rows')} id={id} />))}
           <Col add onClick={this.handleAdd('rows')} >add</Col>
         </Row>
         <Row>
           <Col space />
           <Col space />
+          <Col space />
+          {this.renderDelete(this.state.rows)}
+        </Row>
+
+        <Row>
+          <Col space />
+          <Col space />
+          <Col space />
           {this.renderRows(this.state.rows)}
         </Row>
+
         {this.renderCols(this.state.cols)}
         <Row>
           <Col add onClick={this.handleAdd('cols')} >add</Col>
