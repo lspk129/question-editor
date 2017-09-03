@@ -2,16 +2,16 @@ import styled from 'styled-components';
 
 export const Grid = styled.div`
   display: grid;
+  ${({ size }) => `grid-template-columns: repeat(${size}, max-content)`};
   grid-gap: 10px;
-  grid-auto-rows: 50px;
 `;
 
 export const Row = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, 50px);
-  grid-template-rows: 50px;
+  grid-auto-rows: 50px;
+  grid-auto-columns: minmax(50px, max-content);
   grid-column-gap: 10px;
-  ${({ first }) => first && 'grid-column: 3;'};
+  grid-gap: 10px;
 `;
 
 export const Col = styled.div`
@@ -23,9 +23,17 @@ export const Col = styled.div`
   ${({ remove }) => remove && 'background-color: salmon; cursor: pointer'};
   ${({ add }) => add && 'background-color: lightSeaGreen; cursor: pointer'};
   ${({ text }) => text && 'background-color: LightSteelBlue'};
+  ${({ space }) => space && 'background-color: #fff'};
 `;
 
-export const Empty = styled.div`
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
+export const TextInput = styled.input`
+  text-align: center;
+  background: transparent;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  &::placeholder {
+    color: #000;
+    font-style: italic;
+  }
 `;
