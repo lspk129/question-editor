@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, TextInput } from './styles';
+import styled from 'styled-components';
+import { TableGrid, Row, Col, TextInput, TableSection } from './Table';
+import Statistics from './Statistics';
 import { ImageCell, Image } from './ImageCell';
 import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
 import imageIcon from '../icons/ic_image_black_24px.svg';
 import addIcon from '../icons/ic_add_circle_black_24px.svg';
 import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
 
+const MainLayout = styled.div`
+  display: grid;
+  grid-template-columns: 5fr 3fr;
+`;
 class App extends Component {
   state = {
     rows: [
@@ -16,6 +22,7 @@ class App extends Component {
       { id: '12345', text: '', img: [] },
       { id: 'awdwa', text: '', img: [] },
     ],
+    title: '',
   };
 
   handleAdd = axis => () => {
@@ -74,6 +81,8 @@ class App extends Component {
     newState[rowIndex].checked[index] = !newState[rowIndex].checked[index];
     this.setState({ rows: newState });
   };
+
+  handleTitleChange = e => this.setState({ title: e.target.value });
 
   renderDelete = rows => rows.map(({ id }, index) => (
     <Col
@@ -134,39 +143,56 @@ class App extends Component {
   ));
 
   render() {
+    const { rows, cols, title } = this.state;
     return (
-      <Grid size={this.state.cols.length + 4}>
-        <Row>
-          <TransitionRow>
-            {this.renderDelete(this.state.rows)}
-            <Col add onClick={this.handleAdd('rows')} icon={addIcon} />
-          </TransitionRow>
-        </Row>
-        <Row>
-          <TransitionRow>
-            {this.state.rows.map(({ id, img }) => (img.length
-              ? <Image key={`${id}-img`} src={img} />
-              : <ImageCell
-                key={`${id}-img`}
-                id={id}
-                icon={imageIcon}
-                change={this.handleFileChange('rows')}
-              />
-            ))}
-          </TransitionRow>
-        </Row>
-        <Row>
-          <TransitionRow>
-            {this.renderRows(this.state.rows)}
-          </TransitionRow>
-        </Row>
-        <TransitionCol>
-          {this.renderCols(this.state.cols)}
-        </TransitionCol>
-        <Row>
-          <Col add onClick={this.handleAdd('cols')} icon={addIcon} />
-        </Row>
-      </Grid>
+      <MainLayout>
+        <TableSection>
+          <TableSection title>
+            <h2>Question Editor</h2>
+            <TextInput
+              question
+              size={title === '' ? 30 : title.length + 5}
+              type={'text'}
+              placeholder={'Enter title of the question'}
+              onChange={this.handleTitleChange}
+              value={this.state.title}
+            />
+          </TableSection>
+          <TableGrid size={cols.length + 4}>
+            <Row>
+              <TransitionRow>
+                {this.renderDelete(rows)}
+                <Col add onClick={this.handleAdd('rows')} icon={addIcon} />
+              </TransitionRow>
+            </Row>
+            <Row>
+              <TransitionRow>
+                {rows.map(({ id, img }) => (img.length
+                  ? <Image key={`${id}-img`} src={img} />
+                  : <ImageCell
+                    key={`${id}-img`}
+                    id={id}
+                    icon={imageIcon}
+                    change={this.handleFileChange('rows')}
+                  />
+                ))}
+              </TransitionRow>
+            </Row>
+            <Row>
+              <TransitionRow>
+                {this.renderRows(rows)}
+              </TransitionRow>
+            </Row>
+            <TransitionCol>
+              {this.renderCols(cols)}
+            </TransitionCol>
+            <Row>
+              <Col add onClick={this.handleAdd('cols')} icon={addIcon} />
+            </Row>
+          </TableGrid>
+        </TableSection>
+        <Statistics state={this.state} />
+      </MainLayout>
     );
   }
 }

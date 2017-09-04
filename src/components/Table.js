@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
-export const Grid = styled.div`
+export const TableGrid = styled.div`
   display: grid;
   ${({ size }) => `grid-template-columns: repeat(${size}, max-content)`};
   grid-gap: 10px;
+  border-right: 1px solid grey;
 `;
 
 export const Row = styled.div`
@@ -43,9 +44,22 @@ export const TextInput = styled.input`
     color: #000;
     font-style: italic;
   }
+  ${({ question }) => question && `
+    font-size: 20px;
+    width: 100%;
+    text-align: left;
+    &::placeholder {
+      color: grey;
+    }
+  `}
 `;
 
 export const Icon = styled.div`
   align-self: center;
   justify-self: center;
+`;
+
+export const TableSection = styled.div`
+  display: grid;
+  ${({ title }) => title && 'padding: 0 20px 20px;'};
 `;
