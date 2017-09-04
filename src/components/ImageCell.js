@@ -30,6 +30,11 @@ export const Image = styled.img`
   height: 50px;
   align-self: center;
   justify-self: center;
+  ${({ small }) => small && `
+    width: 30px;
+    padding: 0 10px 0 20px;
+    opacity: 0.7;
+  `}
 `;
 
 export const ImageCell = ({ change, id, icon }) => (

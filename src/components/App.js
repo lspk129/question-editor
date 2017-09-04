@@ -7,6 +7,7 @@ import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
 import imageIcon from '../icons/ic_image_black_24px.svg';
 import addIcon from '../icons/ic_add_circle_black_24px.svg';
 import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
+import Legend from './Legend';
 
 const MainLayout = styled.div`
   display: grid;
@@ -145,7 +146,7 @@ class App extends Component {
   render() {
     const { rows, cols, title } = this.state;
     return (
-      <MainLayout>
+      <MainLayout test>
         <TableSection main>
           <TableSection title>
             <h2>Question Editor</h2>
@@ -192,6 +193,7 @@ class App extends Component {
           </TableGrid>
         </TableSection>
         <Statistics state={this.state} />
+        <Legend />
       </MainLayout>
     );
   }
