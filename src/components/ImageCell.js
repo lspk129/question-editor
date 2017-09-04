@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ImageLabel = styled.label`
-  border: 1px solid #ccc;
   width: 100%;
   height: 100%;
   cursor: pointer;
@@ -12,6 +11,14 @@ const ImageLabel = styled.label`
   justify-items: center;
   margin: auto;
   font-size: 12px;
+  ${({ icon }) => icon && `
+    background: url(${icon});
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0.7;
+  `};
 `;
 
 const ImageInput = styled.input`
@@ -25,18 +32,18 @@ export const Image = styled.img`
   justify-self: center;
 `;
 
-export const ImageCell = ({ change, id }) => (
-  <ImageLabel>
+export const ImageCell = ({ change, id, icon }) => (
+  <ImageLabel icon={icon} >
     <ImageInput
       type={'file'}
       onChange={change}
       data-img={id}
     />
-      img
   </ImageLabel>
 );
 
 ImageCell.propTypes = {
   change: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
 };

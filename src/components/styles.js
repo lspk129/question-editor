@@ -19,11 +19,18 @@ export const Col = styled.div`
   align-items: center;
   justify-items: center;
   font-size: 12px;
-  background-color: #BADA55;
   ${({ remove }) => remove && 'background-color: salmon; cursor: pointer'};
   ${({ add }) => add && 'background-color: lightSeaGreen; cursor: pointer'};
   ${({ text }) => text && 'background-color: LightSteelBlue'};
   ${({ space }) => space && 'background-color: #fff'};
+  ${({ icon }) => icon && `
+    background: url(${icon});
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    opacity: 0.7;
+  `};
 `;
 
 export const TextInput = styled.input`
@@ -36,4 +43,9 @@ export const TextInput = styled.input`
     color: #000;
     font-style: italic;
   }
+`;
+
+export const Icon = styled.div`
+  align-self: center;
+  justify-self: center;
 `;

@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Grid, Row, Col, TextInput } from './styles';
 import { ImageCell, Image } from './ImageCell';
+import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
+import imageIcon from '../icons/ic_image_black_24px.svg';
+import addIcon from '../icons/ic_add_circle_black_24px.svg';
 
 class App extends Component {
   state = {
@@ -37,13 +40,17 @@ class App extends Component {
     this.setState({ [axis]: newState });
   }
 
-  handleDelete = axis => (e) => {
+  handleDelete = (axis, index) => () => {
+    if (axis === 'cols') {
+      const newState = this.state.rows;
+      // eslint-disable-next-line array-callback-return
+      newState.map(({ checked }, i) => {
+        newState[i].checked = [...checked.slice(0, index), ...checked.slice(index + 1)];
+      });
+      this.setState({ rows: newState });
+    }
     const cells = this.state[axis];
-    const cellIndex = cells.findIndex(cell => cell.id === e.target.dataset[axis]);
-    const newState = [
-      ...cells.slice(0, cellIndex),
-      ...cells.slice(cellIndex + 1),
-    ];
+    const newState = [...cells.slice(0, index), ...cells.slice(index + 1)];
     this.setState({ [axis]: newState });
   };
 
@@ -67,19 +74,17 @@ class App extends Component {
     this.setState({ rows: newState });
   };
 
-  renderDelete = rows => rows.map(({ id }) => (
+  renderDelete = rows => rows.map(({ id }, index) => (
     <Col
-      key={`${id}`}
-      remove
+      key={`${id}-del`}
+      icon={deleteIcon}
       data-rows={id}
-      onClick={this.handleDelete('rows')}
-    >
-      del
-    </Col>
+      onClick={this.handleDelete('rows', index)}
+    />
   ));
 
   renderRows = rows => rows.map(({ id, text }, index) => (
-    <Col text key={id}>
+    <Col text key={`${id}-rows`}>
       <TextInput
         size={text === '' ? 6 : text.length + 1}
         data-input={id}
@@ -92,19 +97,17 @@ class App extends Component {
   ));
 
   renderCols = cols => cols.map(({ id, text, img }, index) => (
-    <Row key={id}>
+    <Row key={`${id}-cols`}>
       <Col
-        remove
+        icon={deleteIcon}
         data-cols={id}
-        onClick={this.handleDelete('cols')}
-      >
-        del
-      </Col>
+        onClick={this.handleDelete('cols', index)}
+      />
       {img.length
         ? <Image src={img} />
-        : <ImageCell change={this.handleFileChange('cols')} id={id} />
+        : <ImageCell change={this.handleFileChange('cols')} id={id} icon={imageIcon} />
       }
-      <Col text key={id}>
+      <Col text>
         <TextInput
           size={text === '' ? 6 : text.length + 1}
           data-input={id}
@@ -134,15 +137,21 @@ class App extends Component {
           <Col space />
           <Col space />
           {this.renderDelete(this.state.rows)}
-          <Col add onClick={this.handleAdd('rows')} >add</Col>
+          <Col add onClick={this.handleAdd('rows')} icon={addIcon} />
         </Row>
         <Row>
           <Col space />
           <Col space />
           <Col space />
           {this.state.rows.map(({ id, img }) => (img.length
-            ? <Image key={id} src={img} />
-            : <ImageCell key={id} change={this.handleFileChange('rows')} id={id} />))}
+            ? <Image key={`${id}-img`} src={img} />
+            : <ImageCell
+              key={`${id}-img`}
+              id={id}
+              icon={imageIcon}
+              change={this.handleFileChange('rows')}
+            />
+          ))}
         </Row>
 
         <Row>
@@ -154,7 +163,7 @@ class App extends Component {
 
         {this.renderCols(this.state.cols)}
         <Row>
-          <Col add onClick={this.handleAdd('cols')} >add</Col>
+          <Col add onClick={this.handleAdd('cols')} icon={addIcon} />
         </Row>
       </Grid>
     );
