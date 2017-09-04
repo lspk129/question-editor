@@ -4,6 +4,7 @@ import { ImageCell, Image } from './ImageCell';
 import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
 import imageIcon from '../icons/ic_image_black_24px.svg';
 import addIcon from '../icons/ic_add_circle_black_24px.svg';
+import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
 
 class App extends Component {
   state = {
@@ -117,15 +118,18 @@ class App extends Component {
           onChange={this.handleTextChange('cols')}
         />
       </Col>
-      {this.state.rows.map(({ id: rowId, checked }) => (<Col key={`${rowId}-radio`}>
-        <input
-          data-radio={rowId}
-          type={'radio'}
-          checked={checked[index]}
-          onClick={this.handleRadioChange(index)}
-        />
-      </Col>))
-      }
+      <TransitionAll>
+        {this.state.rows.map(({ id: rowId, checked }) => (
+          <Col key={`${rowId}-radio`}>
+            <input
+              data-radio={rowId}
+              type={'radio'}
+              checked={checked[index]}
+              onClick={this.handleRadioChange(index)}
+            />
+          </Col>
+        ))}
+      </TransitionAll>
     </Row>
   ));
 
@@ -133,35 +137,32 @@ class App extends Component {
     return (
       <Grid size={this.state.cols.length + 4}>
         <Row>
-          <Col space />
-          <Col space />
-          <Col space />
-          {this.renderDelete(this.state.rows)}
-          <Col add onClick={this.handleAdd('rows')} icon={addIcon} />
+          <TransitionRow>
+            {this.renderDelete(this.state.rows)}
+            <Col add onClick={this.handleAdd('rows')} icon={addIcon} />
+          </TransitionRow>
         </Row>
         <Row>
-          <Col space />
-          <Col space />
-          <Col space />
-          {this.state.rows.map(({ id, img }) => (img.length
-            ? <Image key={`${id}-img`} src={img} />
-            : <ImageCell
-              key={`${id}-img`}
-              id={id}
-              icon={imageIcon}
-              change={this.handleFileChange('rows')}
-            />
-          ))}
+          <TransitionRow>
+            {this.state.rows.map(({ id, img }) => (img.length
+              ? <Image key={`${id}-img`} src={img} />
+              : <ImageCell
+                key={`${id}-img`}
+                id={id}
+                icon={imageIcon}
+                change={this.handleFileChange('rows')}
+              />
+            ))}
+          </TransitionRow>
         </Row>
-
         <Row>
-          <Col space />
-          <Col space />
-          <Col space />
-          {this.renderRows(this.state.rows)}
+          <TransitionRow>
+            {this.renderRows(this.state.rows)}
+          </TransitionRow>
         </Row>
-
-        {this.renderCols(this.state.cols)}
+        <TransitionCol>
+          {this.renderCols(this.state.cols)}
+        </TransitionCol>
         <Row>
           <Col add onClick={this.handleAdd('cols')} icon={addIcon} />
         </Row>
