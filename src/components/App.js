@@ -146,7 +146,7 @@ class App extends Component {
     const { rows, cols, title } = this.state;
     return (
       <MainLayout>
-        <TableSection>
+        <TableSection main>
           <TableSection title>
             <h2>Question Editor</h2>
             <TextInput

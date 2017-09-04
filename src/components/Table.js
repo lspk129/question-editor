@@ -60,6 +60,6 @@ export const Icon = styled.div`
 `;
 
 export const TableSection = styled.div`
-  display: grid;
+  ${({ main }) => main && 'display: grid;'};
   ${({ title }) => title && 'padding: 0 20px 20px;'};
 `;
