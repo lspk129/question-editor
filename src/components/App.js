@@ -5,8 +5,8 @@ import { ImageCell, Image } from './ImageCell';
 class App extends Component {
   state = {
     rows: [
-      { id: 'ybvtb', text: '', img: [] },
-      { id: 'm23n4', text: '', img: [] },
+      { id: 'ybvtb', text: '', img: [], checked: [false, false] },
+      { id: 'm23n4', text: '', img: [], checked: [false, false] },
     ],
     cols: [
       { id: '12345', text: '', img: [] },
@@ -16,15 +16,23 @@ class App extends Component {
 
   handleAdd = axis => () => {
     const id = Math.random().toString(36).slice(-5);
-    this.setState({
-      [axis]: [...this.state[axis], { id, text: '', img: [] }],
-    });
-  }
+    if (axis === 'rows') {
+      const checked = Array.from({ length: this.state.cols.length }, () => false);
+      this.setState({ rows: [...this.state[axis], { id, text: '', img: [], checked }] });
+    } else {
+      const newState = this.state.rows;
+      // eslint-disable-next-line array-callback-return
+      newState.map(({ checked }, index) => { newState[index].checked = [...checked, false]; });
+      this.setState({
+        rows: newState,
+        cols: [...this.state[axis], { id, text: '', img: [] }],
+      });
+    }
+  };
 
   handleTextChange = axis => (e) => {
-    const cells = this.state[axis];
-    const cellIndex = cells.findIndex(cell => cell.id === e.target.dataset.input);
     const newState = this.state[axis];
+    const cellIndex = newState.findIndex(cell => cell.id === e.target.dataset.input);
     newState[cellIndex].text = e.target.value;
     this.setState({ [axis]: newState });
   }
@@ -32,17 +40,16 @@ class App extends Component {
   handleDelete = axis => (e) => {
     const cells = this.state[axis];
     const cellIndex = cells.findIndex(cell => cell.id === e.target.dataset[axis]);
-    const newCellState = [
+    const newState = [
       ...cells.slice(0, cellIndex),
       ...cells.slice(cellIndex + 1),
     ];
-    this.setState({ [axis]: newCellState });
+    this.setState({ [axis]: newState });
   };
 
   handleFileChange = axis => (e) => {
-    const cells = this.state[axis];
-    const cellIndex = cells.findIndex(cell => cell.id === e.target.dataset.img);
     const newState = this.state[axis];
+    const cellIndex = newState.findIndex(cell => cell.id === e.target.dataset.img);
     const reader = new FileReader();
     const file = e.target.files[0];
     reader.onloadend = () => {
@@ -50,6 +57,14 @@ class App extends Component {
       this.setState({ [axis]: newState });
     };
     reader.readAsDataURL(file);
+  };
+
+  handleRadioChange = index => (e) => {
+    const newState = this.state.rows;
+    const rowIndex = newState.findIndex(({ id }) => id === e.target.dataset.radio);
+    newState[rowIndex].checked = newState[rowIndex].checked.map(() => false);
+    newState[rowIndex].checked[index] = !newState[rowIndex].checked[index];
+    this.setState({ rows: newState });
   };
 
   renderDelete = rows => rows.map(({ id }) => (
@@ -78,10 +93,6 @@ class App extends Component {
 
   renderCols = cols => cols.map(({ id, text, img }, index) => (
     <Row key={id}>
-      {img.length
-        ? <Image src={img} />
-        : <ImageCell change={this.handleFileChange('cols')} id={id} />
-      }
       <Col
         remove
         data-cols={id}
@@ -89,6 +100,10 @@ class App extends Component {
       >
         del
       </Col>
+      {img.length
+        ? <Image src={img} />
+        : <ImageCell change={this.handleFileChange('cols')} id={id} />
+      }
       <Col text key={id}>
         <TextInput
           size={text === '' ? 6 : text.length + 1}
@@ -99,7 +114,15 @@ class App extends Component {
           onChange={this.handleTextChange('cols')}
         />
       </Col>
-      {this.state.rows.map(col => <Col key={col.id}><input type="radio" /></Col>)}
+      {this.state.rows.map(({ id: rowId, checked }) => (<Col key={`${rowId}-radio`}>
+        <input
+          data-radio={rowId}
+          type={'radio'}
+          checked={checked[index]}
+          onClick={this.handleRadioChange(index)}
+        />
+      </Col>))
+      }
     </Row>
   ));
 
@@ -110,16 +133,16 @@ class App extends Component {
           <Col space />
           <Col space />
           <Col space />
-          {this.state.rows.map(({ id, img }) => (img.length
-            ? <Image key={id} src={img} />
-            : <ImageCell key={id} change={this.handleFileChange('rows')} id={id} />))}
+          {this.renderDelete(this.state.rows)}
           <Col add onClick={this.handleAdd('rows')} >add</Col>
         </Row>
         <Row>
           <Col space />
           <Col space />
           <Col space />
-          {this.renderDelete(this.state.rows)}
+          {this.state.rows.map(({ id, img }) => (img.length
+            ? <Image key={id} src={img} />
+            : <ImageCell key={id} change={this.handleFileChange('rows')} id={id} />))}
         </Row>
 
         <Row>
