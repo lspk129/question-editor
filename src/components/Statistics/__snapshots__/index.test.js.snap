@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Statistics component renders correctly 1`] = `
+<Statistics
+  state={
+    Object {
+      "cols": Array [
+        Object {
+          "id": "2",
+          "img": Array [
+            "1",
+          ],
+          "text": "",
+        },
+        Object {
+          "id": "3",
+          "img": Array [],
+          "text": "world",
+        },
+      ],
+      "rows": Array [
+        Object {
+          "id": "1",
+          "img": Array [],
+          "text": "hello",
+        },
+      ],
+    }
+  }
+>
+  <styled.div>
+    <div
+      className="sc-bdVaJa floIIC"
+    >
+      <h2>
+        Question Summary View
+      </h2>
+      <h3>
+        Summary
+      </h3>
+      <styled.div
+        stats={true}
+      >
+        <div
+          className="sc-bdVaJa hMXEoI"
+        >
+          <p>
+            Number of rows: 
+            1
+          </p>
+          <p>
+            Number of columns: 
+            2
+          </p>
+          <p>
+            Number of images uploaded: 
+            1
+          </p>
+          <p>
+            Longest row label: 
+            5
+          </p>
+          <p>
+            Longest column label: 
+            5
+          </p>
+        </div>
+      </styled.div>
+    </div>
+  </styled.div>
+</Statistics>
+`;

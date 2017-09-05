@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ImageCell renders correctly 1`] = `
+<Component
+  change={[Function]}
+  icon="ic_image_black_24px.svg"
+  id="12345"
+>
+  <styled.label
+    icon="ic_image_black_24px.svg"
+  >
+    <label
+      className="sc-bdVaJa cdXfjg"
+      icon="ic_image_black_24px.svg"
+    >
+      <styled.input
+        data-img="12345"
+        onChange={[Function]}
+        type="file"
+      >
+        <input
+          className="sc-bwzfXH eKeXgs"
+          data-img="12345"
+          onChange={[Function]}
+          type="file"
+        />
+      </styled.input>
+    </label>
+  </styled.label>
+</Component>
+`;

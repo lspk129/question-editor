@@ -39,7 +39,6 @@ Statistics.propTypes = {
     rows: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired,
-      checked: PropTypes.arrayOf(PropTypes.bool).isRequired,
     })).isRequired,
   }).isRequired,
 };

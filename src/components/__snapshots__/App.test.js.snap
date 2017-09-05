@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App component renders corretly 1`] = `
+<styled.div>
+  <styled.div
+    main={true}
+  >
+    <styled.div
+      title={true}
+    >
+      <h2>
+        Question Editor
+      </h2>
+      <styled.input
+        onChange={[Function]}
+        placeholder="Enter title of the question"
+        question={true}
+        size={30}
+        type="text"
+        value=""
+      />
+    </styled.div>
+    <styled.div
+      size={6}
+    >
+      <styled.div>
+        <Styled(Styled(Styled(CSSTransitionGroup)))>
+          <styled.div
+            data-rows="ybvtb"
+            icon="ic_delete_forever_black_24px.svg"
+            onClick={[Function]}
+          />
+          <styled.div
+            data-rows="m23n4"
+            icon="ic_delete_forever_black_24px.svg"
+            onClick={[Function]}
+          />
+          <styled.div
+            add={true}
+            icon="ic_add_circle_black_24px.svg"
+            onClick={[Function]}
+          />
+        </Styled(Styled(Styled(CSSTransitionGroup)))>
+      </styled.div>
+      <styled.div>
+        <Styled(Styled(Styled(CSSTransitionGroup)))>
+          <Component
+            change={[Function]}
+            icon="ic_image_black_24px.svg"
+            id="ybvtb"
+          />
+          <Component
+            change={[Function]}
+            icon="ic_image_black_24px.svg"
+            id="m23n4"
+          />
+        </Styled(Styled(Styled(CSSTransitionGroup)))>
+      </styled.div>
+      <styled.div>
+        <Styled(Styled(Styled(CSSTransitionGroup)))>
+          <styled.div
+            text={true}
+          >
+            <styled.input
+              data-input="ybvtb"
+              onChange={[Function]}
+              placeholder="row1"
+              size={6}
+              type="text"
+              value=""
+            />
+          </styled.div>
+          <styled.div
+            text={true}
+          >
+            <styled.input
+              data-input="m23n4"
+              onChange={[Function]}
+              placeholder="row2"
+              size={6}
+              type="text"
+              value=""
+            />
+          </styled.div>
+        </Styled(Styled(Styled(CSSTransitionGroup)))>
+      </styled.div>
+      <Styled(Styled(CSSTransitionGroup))>
+        <styled.div>
+          <styled.div
+            data-cols="12345"
+            icon="ic_delete_forever_black_24px.svg"
+            onClick={[Function]}
+          />
+          <Component
+            change={[Function]}
+            icon="ic_image_black_24px.svg"
+            id="12345"
+          />
+          <styled.div
+            text={true}
+          >
+            <styled.input
+              data-input="12345"
+              onChange={[Function]}
+              placeholder="col1"
+              size={6}
+              type="text"
+              value=""
+            />
+          </styled.div>
+          <Styled(Styled(CSSTransitionGroup))>
+            <styled.div>
+              <input
+                checked={false}
+                data-radio="ybvtb"
+                onClick={[Function]}
+                type="radio"
+              />
+            </styled.div>
+            <styled.div>
+              <input
+                checked={false}
+                data-radio="m23n4"
+                onClick={[Function]}
+                type="radio"
+              />
+            </styled.div>
+          </Styled(Styled(CSSTransitionGroup))>
+        </styled.div>
+        <styled.div>
+          <styled.div
+            data-cols="awdwa"
+            icon="ic_delete_forever_black_24px.svg"
+            onClick={[Function]}
+          />
+          <Component
+            change={[Function]}
+            icon="ic_image_black_24px.svg"
+            id="awdwa"
+          />
+          <styled.div
+            text={true}
+          >
+            <styled.input
+              data-input="awdwa"
+              onChange={[Function]}
+              placeholder="col2"
+              size={6}
+              type="text"
+              value=""
+            />
+          </styled.div>
+          <Styled(Styled(CSSTransitionGroup))>
+            <styled.div>
+              <input
+                checked={false}
+                data-radio="ybvtb"
+                onClick={[Function]}
+                type="radio"
+              />
+            </styled.div>
+            <styled.div>
+              <input
+                checked={false}
+                data-radio="m23n4"
+                onClick={[Function]}
+                type="radio"
+              />
+            </styled.div>
+          </Styled(Styled(CSSTransitionGroup))>
+        </styled.div>
+      </Styled(Styled(CSSTransitionGroup))>
+      <styled.div>
+        <styled.div
+          add={true}
+          icon="ic_add_circle_black_24px.svg"
+          onClick={[Function]}
+        />
+      </styled.div>
+    </styled.div>
+  </styled.div>
+  <Statistics
+    state={
+      Object {
+        "cols": Array [
+          Object {
+            "id": "12345",
+            "img": Array [],
+            "text": "",
+          },
+          Object {
+            "id": "awdwa",
+            "img": Array [],
+            "text": "",
+          },
+        ],
+        "rows": Array [
+          Object {
+            "checked": Array [
+              false,
+              false,
+            ],
+            "id": "ybvtb",
+            "img": Array [],
+            "text": "",
+          },
+          Object {
+            "checked": Array [
+              false,
+              false,
+            ],
+            "id": "m23n4",
+            "img": Array [],
+            "text": "",
+          },
+        ],
+        "title": "",
+      }
+    }
+  />
+  <Legend />
+</styled.div>
+`;

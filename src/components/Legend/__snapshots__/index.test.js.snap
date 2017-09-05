@@ -1,0 +1,103 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Legend component renders correctly 1`] = `
+<Legend>
+  <styled.div>
+    <div
+      className="sc-bxivhb gDVEBz"
+    >
+      <h3>
+        Legend
+      </h3>
+      <styled.p>
+        <p
+          className="sc-ifAKCX NRBvW"
+        >
+          <styled.img
+            small={true}
+            src="ic_image_black_24px.svg"
+          >
+            <img
+              className="sc-htpNat dMAxOZ"
+              src="ic_image_black_24px.svg"
+            />
+          </styled.img>
+           - 
+          <styled.span>
+            <span
+              className="sc-EHOje jArNoe"
+            >
+              Add images
+            </span>
+          </styled.span>
+        </p>
+      </styled.p>
+      <styled.p>
+        <p
+          className="sc-ifAKCX NRBvW"
+        >
+          <styled.img
+            small={true}
+            src="ic_add_circle_black_24px.svg"
+          >
+            <img
+              className="sc-htpNat dMAxOZ"
+              src="ic_add_circle_black_24px.svg"
+            />
+          </styled.img>
+           - 
+          <styled.span>
+            <span
+              className="sc-EHOje jArNoe"
+            >
+              Add row/column
+            </span>
+          </styled.span>
+        </p>
+      </styled.p>
+      <styled.p>
+        <p
+          className="sc-ifAKCX NRBvW"
+        >
+          <styled.img
+            small={true}
+            src="ic_delete_forever_black_24px.svg"
+          >
+            <img
+              className="sc-htpNat dMAxOZ"
+              src="ic_delete_forever_black_24px.svg"
+            />
+          </styled.img>
+           - 
+          <styled.span>
+            <span
+              className="sc-EHOje jArNoe"
+            >
+              Delete row/column
+            </span>
+          </styled.span>
+        </p>
+      </styled.p>
+      <styled.p
+        note={true}
+      >
+        <p
+          className="sc-ifAKCX ibuCQc"
+        >
+          <i>
+            Italic
+          </i>
+           
+          <styled.span>
+            <span
+              className="sc-EHOje jArNoe"
+            >
+              text is editable
+            </span>
+          </styled.span>
+        </p>
+      </styled.p>
+    </div>
+  </styled.div>
+</Legend>
+`;
