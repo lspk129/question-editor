@@ -3,12 +3,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import './style.css';
 
 /**
- * Normaly I would write props into one styled component
- * but adding props to external component like ReactCSSTransitionGroup
- * getting errors of 'unknown props to <span>' or other tag.
- * Also adding css styles from external sheet, because
- * transitions through styled components do not want to work properly, probobly because
- * styled components styles overides transitions styles
+ * Adding props to external component like ReactCSSTransitionGroup
+ * throws not critical errors of 'unknown prop to...' html tag,
+ * a workaround is to extend styles.
+ * Transition styles do not respond written in styled-components.
  */
 const Transition = styled(ReactCSSTransitionGroup).attrs({
   transitionName: 'example',

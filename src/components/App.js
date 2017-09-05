@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
 import { TableGrid, Row, Col, TextInput, TableSection } from './Table';
 import Statistics from './Statistics';
 import { ImageCell, Image } from './ImageCell';
+import Legend from './Legend';
 import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
 import imageIcon from '../icons/ic_image_black_24px.svg';
 import addIcon from '../icons/ic_add_circle_black_24px.svg';
-import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
-import Legend from './Legend';
 
 const MainLayout = styled.div`
   display: grid;
+  padding: 20px;
   grid-template-columns: 5fr 3fr;
 `;
 class App extends Component {
@@ -50,6 +51,7 @@ class App extends Component {
   }
 
   handleDelete = (axis, index) => () => {
+    if (this.state[axis].length < 2) return;
     if (axis === 'cols') {
       const newState = this.state.rows;
       // eslint-disable-next-line array-callback-return
@@ -146,7 +148,7 @@ class App extends Component {
   render() {
     const { rows, cols, title } = this.state;
     return (
-      <MainLayout test>
+      <MainLayout>
         <TableSection main>
           <TableSection title>
             <h2>Question Editor</h2>
