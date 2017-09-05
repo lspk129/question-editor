@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import getStatistics from '../utils/utils';
+import getStatistics from '../../utils';
 
 const Section = styled.div`
   padding: 0 20px 20px;

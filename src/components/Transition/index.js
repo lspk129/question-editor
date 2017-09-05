@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import './style.css';
+import '../style.css';
 
 /**
  * Adding props to external component like ReactCSSTransitionGroup

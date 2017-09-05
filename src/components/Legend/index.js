@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Image } from './ImageCell';
-import deleteIcon from '../icons/ic_delete_forever_black_24px.svg';
-import imageIcon from '../icons/ic_image_black_24px.svg';
-import addIcon from '../icons/ic_add_circle_black_24px.svg';
+import { Image } from '../ImageCell';
+import deleteIcon from '../../icons/ic_delete_forever_black_24px.svg';
+import imageIcon from '../../icons/ic_image_black_24px.svg';
+import addIcon from '../../icons/ic_add_circle_black_24px.svg';
 
 const Section = styled.div`
   grid-column: 2;
