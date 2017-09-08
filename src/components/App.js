@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { TransitionAll, TransitionRow, TransitionCol } from './Transition';
+import { TransitionRow, TransitionCol } from './Transition';
 import { TableGrid, Row, Col, TextInput, TableSection } from './Table';
 import Statistics from './Statistics';
 import { ImageCell, Image } from './ImageCell';

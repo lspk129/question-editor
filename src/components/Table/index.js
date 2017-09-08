@@ -20,10 +20,7 @@ export const Col = styled.div`
   align-items: center;
   justify-items: center;
   font-size: 12px;
-  ${({ remove }) => remove && 'background-color: salmon; cursor: pointer'};
-  ${({ add }) => add && 'background-color: lightSeaGreen; cursor: pointer'};
   ${({ text }) => text && 'background-color: LightSteelBlue'};
-  ${({ space }) => space && 'background-color: #fff'};
   ${({ icon }) => icon && `
     background: url(${icon});
     background-size: 30px 30px;
