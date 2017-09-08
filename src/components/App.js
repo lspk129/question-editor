@@ -130,18 +130,16 @@ class App extends Component {
           onChange={this.handleTextChange('cols')}
         />
       </Col>
-      <TransitionAll>
-        {this.state.rows.map(({ id: rowId, checked }) => (
-          <Col key={`${rowId}-radio`}>
-            <input
-              data-radio={rowId}
-              type={'radio'}
-              checked={checked[index]}
-              onClick={this.handleRadioChange(index)}
-            />
-          </Col>
-        ))}
-      </TransitionAll>
+      {this.state.rows.map(({ id: rowId, checked }) => (
+        <Col key={`${rowId}-radio`}>
+          <input
+            data-radio={rowId}
+            type={'radio'}
+            checked={checked[index]}
+            onClick={this.handleRadioChange(index)}
+          />
+        </Col>
+      ))}
     </Row>
   ));
 
